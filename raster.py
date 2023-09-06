@@ -1,6 +1,7 @@
 from algorithm import mandelbrot
 from pixelconvert import hex_to_int
 from pson import load_json
+
 import numpy as np
 
 def pixel_increment(maximum, minimum, denominator):
@@ -20,6 +21,7 @@ def generate_raster(settings_file):
     START_Y = settings['start_y']
     MAX_X = settings['max_x']
     SAF = settings['screen_auto_format']
+
     if SAF:
         WIDTH_MULTIPLIER, HEIGHT_MULTIPLIER = settings['aspect_ratio']
 
@@ -38,27 +40,31 @@ def generate_raster(settings_file):
         color_scheme = settings['color_scheme']
         for colour in color_scheme:
             color_scheme[colour] = hex_to_int(color_scheme[colour])
-    
+
     iterable_min_x = START_X
     iterable_min_y = START_Y
     raster = []
-    
+
     for i in range(HEIGHT):
         raster.append([])
-        
+
         for j in range(WIDTH):
-            z = c = complex(iterable_min_x, iterable_min_y)
+            c = complex(iterable_min_x, iterable_min_y)
+            z = c
+
             pixel_value = mandelbrot(c, PIXEL_RESOLUTION)
-            
+
             if pixel_value and colormode:
                 raster[i].append(color_scheme[pixel_value])
             elif pixel_value and not colormode:
                 raster[i].append([255, 255, 255])
             else:
                 raster[i].append(fractal_color)
+
             iterable_min_x += pixel_increment(MAX_X, START_X, WIDTH)
 
         iterable_min_x = START_X
         iterable_min_y += pixel_increment(MAX_Y, START_Y, HEIGHT)
 
     return np.array(raster, dtype=np.uint8)
+
