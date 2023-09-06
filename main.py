@@ -3,8 +3,8 @@ from pixelconvert import hex_to_int
 from PIL import Image
 
 def main():
-    arr = generate_raster('settings.json')
-    img = Image.fromarray(arr)
+    array = generate_raster('settings.json')
+    img = Image.fromarray(array)
     img.save('hello.png')
 
 if __name__ == '__main__':
