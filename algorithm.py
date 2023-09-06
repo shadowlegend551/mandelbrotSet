@@ -1,4 +1,4 @@
-def mandelbrot(c, pixel_resolution):
+def mandelbrot(c: complex, pixel_resolution: int) -> str:
     ESCAPE_BOUNDARY = 2
     z = c
 

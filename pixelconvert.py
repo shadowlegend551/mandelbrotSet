@@ -2,7 +2,7 @@
 # ([255, 255, 255])
 # Useful when using Image.fromarray().
 
-def hex_to_int(pixel_as_hex):
+def hex_to_int(pixel_as_hex: str) -> int:
 
     # Remove the heading hashtag.
     pixel_as_hex = pixel_as_hex[1:]

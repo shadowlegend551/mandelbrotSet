@@ -4,16 +4,19 @@ from pson import load_json
 
 import numpy as np
 
-def pixel_increment(maximum, minimum, denominator):
+def pixel_increment(maximum: int, minimum: int, denominator:int) -> float:
     return abs(maximum - minimum) / denominator
 
-def get_dynamic_height(width, screen_width_multiplier, screen_height_multiplier):
+def get_dynamic_height(width: int, screen_width_multiplier: float,
+                       screen_height_multiplier: float) -> int:
     return int(width / screen_width_multiplier * screen_height_multiplier)
 
-def get_dynamic_max_y(start_y, max_x, start_x, screen_width_multiplier, screen_height_multiplier):
+def get_dynamic_max_y(start_y: int, max_x: int, start_x: int,
+                      screen_width_multiplier: float,
+                      screen_height_multiplier: float) -> float:
     return start_y + (max_x - start_x) / screen_width_multiplier * screen_height_multiplier
 
-def generate_raster(settings_file):
+def generate_raster(settings_file: str) -> np.ndarray:
     settings = load_json(settings_file)
 
     WIDTH = settings['width']
