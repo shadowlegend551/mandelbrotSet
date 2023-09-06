@@ -1,8 +1,14 @@
-# Converts a hexadecimal pixel value (#FFFFFF) into RGB-format:
-# (255, 255, 255)
-# Useful when using Image.fromarray()
+# Converts a hexadecimal pixel string (e.g. "#FFFFFF") into RGB-format:
+# ([255, 255, 255])
+# Useful when using Image.fromarray().
 
-def hex_to_int(hex_pixel):
-    hex_pixel = hex_pixel[1:]
-    int_pixel = [int(hex_pixel[i:i+2], 16) for i in range(0, len(hex_pixel), 2)]
-    return int_pixel
+def hex_to_int(pixel_as_hex):
+
+    # Remove the heading hashtag.
+    pixel_as_hex = pixel_as_hex[1:]
+
+    # Some list comprehension magic.
+    pixel_as_int = [int(pixel_as_hex[i:i+2], 16) \
+                    for i in range(0, len(pixel_as_hex), 2)]
+
+    return pixel_as_int
