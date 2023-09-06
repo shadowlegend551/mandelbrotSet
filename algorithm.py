@@ -1,10 +1,14 @@
 def mandelbrot(c, pixel_resolution):
+    ESCAPE_BOUNDARY = 2
     z = c
 
-    for i in range(pixel_resolution):
+    for iteration_count in range(1, pixel_resolution):
         z = z**2+c
-        # If z is guaranteed to escape to infinity.
-        if z.real > 2 or z.imag > 2:
-            return str(i+1)
+
+        # If the real or imaginary part is over 2,
+        # the value is guaranteed to escape to infinity.
+        if z.real > ESCAPE_BOUNDARY or z.imag > ESCAPE_BOUNDARY:
+            return str(iteration_count)
 
     return False
+
